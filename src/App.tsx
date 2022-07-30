@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import PriceBox from "./components/PriceBox";
-import { mockTradingInfo } from "./utils/mockData";
+import { mockApiCall } from "./utils/mockData";
 
 export type TradingInfo = {
   name: string;
@@ -11,14 +11,21 @@ export type TradingInfo = {
 };
 
 function App() {
-  const [data, setData] = React.useState<TradingInfo[]>(mockTradingInfo);
+  const [data, setData] = React.useState<TradingInfo[]>([]);
+
+  React.useEffect(() => {
+    const id = setInterval(() => {
+      mockApiCall().then(setData);
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <div className="App">
       <h1>Cryptocurrency Realtime Price</h1>
       <div className="prices">
         {data.map((crypto) => (
-          <PriceBox data={crypto} />
+          <PriceBox data={crypto} key={crypto.name} />
         ))}
       </div>
     </div>

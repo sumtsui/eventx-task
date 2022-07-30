@@ -1,3 +1,5 @@
+import { TradingInfo } from "../App";
+
 export const mockTradingInfo = [
   {
     name: "Bitcoin",
@@ -42,3 +44,18 @@ export const mockTradingInfo = [
     priceUsd: "51.1940376615057531",
   },
 ];
+
+export const mockApiCall = (): Promise<TradingInfo[]> => {
+  return new Promise((resolve) => {
+    setTimeout(
+      () =>
+        resolve(
+          mockTradingInfo.map((info) => ({
+            ...info,
+            priceUsd: info.priceUsd + Math.random() * 10,
+          }))
+        ),
+      200
+    );
+  });
+};
