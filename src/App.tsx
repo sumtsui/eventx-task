@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import PriceBox from "./components/PriceBox";
+import { mockTradingInfo } from "./utils/mockData";
+
+export type TradingInfo = {
+  name: string;
+  priceUsd: string;
+  volumeUsd24Hr: string;
+  changePercent24Hr: string;
+};
 
 function App() {
+  const [data, setData] = React.useState<TradingInfo[]>(mockTradingInfo);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Cryptocurrency Realtime Price</h1>
+      <div>
+        {data.map((crypto) => (
+          <PriceBox data={crypto} />
+        ))}
+      </div>
     </div>
   );
 }
