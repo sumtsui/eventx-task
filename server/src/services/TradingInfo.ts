@@ -5,5 +5,8 @@ export function getTradingInfo() {
     "https://api.coincap.io/v2/assets?ids=bitcoin,ethereum,litecoin,monero,xrp,dogecoin,dash"
   )
     .then((res) => res.json())
-    .catch(() => new Error("ERROR_GET_DATA"));
+    .catch(() => {
+      // logging
+      throw new Error("ERROR_GET_DATA");
+    });
 }

@@ -1,9 +1,4 @@
-type TradingInfo = {
-  name: string;
-  priceUsd: string;
-  volumeUsd24Hr: string;
-  changePercent24Hr: string;
-};
+import { TradingInfo } from "..";
 
 export const mockTradingInfo = [
   {
