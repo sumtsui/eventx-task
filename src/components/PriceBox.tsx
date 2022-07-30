@@ -1,5 +1,6 @@
 import React from "react";
 import { TradingInfo } from "../App";
+import "./PriceBox.css";
 
 function PriceBox({ data }: { data: TradingInfo }) {
   const { name, priceUsd, volumeUsd24Hr, changePercent24Hr } = data;
@@ -9,12 +10,12 @@ function PriceBox({ data }: { data: TradingInfo }) {
       <h3>{priceUsd}</h3>
       <div className="details">
         <div className="volume">
-          <span>volume:</span>
-          <span>{volumeUsd24Hr}</span>
+          <div>volume:</div>
+          <div>{volumeUsd24Hr}</div>
         </div>
         <div className="change">
-          <span>change:</span>
-          <span>{changePercent24Hr}</span>
+          <div>change:</div>
+          <div>{changePercent24Hr}</div>
         </div>
       </div>
     </div>

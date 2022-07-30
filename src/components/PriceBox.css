@@ -1,0 +1,11 @@
+.price-box {
+  width: 350px;
+  margin: 1em;
+  padding: 1em;
+  border: 2px gray solid;
+  border-radius: 5px;
+}
+
+.price-box .details {
+  display: flex;
+}

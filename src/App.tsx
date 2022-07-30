@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <h1>Cryptocurrency Realtime Price</h1>
-      <div>
+      <div className="prices">
         {data.map((crypto) => (
           <PriceBox data={crypto} />
         ))}
