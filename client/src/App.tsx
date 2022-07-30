@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import PriceBox from "./components/PriceBox";
-import { mockApiCall } from "./utils/mockData";
+import getData from "./utils/getData";
 
 export type TradingInfo = {
   name: string;
@@ -15,7 +15,7 @@ function App() {
 
   React.useEffect(() => {
     const id = setInterval(() => {
-      mockApiCall().then(setData);
+      getData().then(setData);
     }, 1000);
     return () => clearInterval(id);
   }, []);
