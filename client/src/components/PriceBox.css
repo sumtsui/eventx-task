@@ -7,6 +7,35 @@
   border-radius: 5px;
 }
 
+.price-box .name {
+  font-size: 2rem;
+  margin-bottom: 0.4em;
+}
+
+.price-box .price {
+  font-size: 1.4rem;
+  text-decoration: none;
+  color: #f5a40a;
+}
+
 .price-box .details {
   display: flex;
+  color: #989898;
+}
+
+.price-box .details .change.up .value {
+  color: #a7e07f;
+}
+
+.price-box .details .change.down .value {
+  color: #d85b5e;
+}
+
+.price-box .details :first-child {
+  margin-right: 1.5em;
+}
+
+.price-box .details div :first-child {
+  margin-bottom: 0.2em;
+  font-weight: bold;
 }
