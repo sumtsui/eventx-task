@@ -4,22 +4,21 @@ import getData from "../utils/getData";
 
 function useTradingInfo() {
   const [data, setData] = React.useState<TradingInfo[]>([]);
-  const [apiState, setApiState] = React.useState({
-    error: false,
-    loading: true,
-  });
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState(false);
 
   React.useEffect(() => {
     const id = setInterval(() => {
       getData()
         .then(setData)
-        .then(() => setApiState({ error: false, loading: false }))
-        .catch(() => setApiState({ error: true, loading: false }));
+        .then(() => setError(false))
+        .catch(() => setError(true))
+        .finally(() => setLoading(false));
     }, 1000);
     return () => clearInterval(id);
   }, []);
 
-  return { data, ...apiState };
+  return { data, loading, error };
 }
 
 export default useTradingInfo;
