@@ -106,7 +106,6 @@ export const mockDownstreamTradingInfo = {
 };
 
 export const mockApiCall = (): Promise<TradingInfo[]> => {
-  // throw new Error("bad");
   // return Promise.reject(new Error("bad"));
   return new Promise((resolve) => {
     setTimeout(() => {
