@@ -45,7 +45,8 @@ export const mockTradingInfo = [
   },
 ];
 
-export const mockApiCall = (): Promise<TradingInfo[]> => {
+export const mockApiCall = (timeout?: number): Promise<TradingInfo[]> => {
+  // return Promise.reject("bad");
   return new Promise((resolve) => {
     setTimeout(
       () =>
@@ -55,7 +56,7 @@ export const mockApiCall = (): Promise<TradingInfo[]> => {
             priceUsd: info.priceUsd + Math.random() * 10,
           }))
         ),
-      200
+      timeout ?? 200
     );
   });
 };

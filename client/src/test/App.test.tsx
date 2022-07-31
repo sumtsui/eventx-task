@@ -1,11 +1,20 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import App from "../App";
+import { mockApiCall, mockTradingInfo } from "../utils/mocks";
 
-test("load data at every given interval", () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+jest.useFakeTimers();
+jest.mock("../utils/getData", () => {
+  return {
+    getData: () => mockApiCall(),
+  };
 });
 
-test("update prices for all crypto currencies");
+test("display crypto info", async () => {
+  render(<App />);
+  expect(screen.getByText("Cryptocurrency Realtime Price")).toBeVisible();
+  jest.advanceTimersByTime(1000);
+  for (const info of mockTradingInfo) {
+    expect(await screen.findByText(info.name)).toBeVisible();
+  }
+});
