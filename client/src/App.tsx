@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import PriceBox from "./components/PriceBox";
-import getData from "./utils/getData";
+import useTradingInfo from "./hooks/useTradingInfo";
 
 export type TradingInfo = {
   name: string;
@@ -11,18 +11,13 @@ export type TradingInfo = {
 };
 
 function App() {
-  const [data, setData] = React.useState<TradingInfo[]>([]);
-
-  React.useEffect(() => {
-    const id = setInterval(() => {
-      getData().then(setData);
-    }, 1000);
-    return () => clearInterval(id);
-  }, []);
+  const { data, loading, error } = useTradingInfo();
 
   return (
     <div className="App">
       <h1>Cryptocurrency Realtime Price</h1>
+      {error && <p>Error occurred.</p>}
+      {loading && <p>Loading...</p>}
       <div className="prices">
         {data.map((crypto) => (
           <PriceBox data={crypto} key={crypto.name} />
