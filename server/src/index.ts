@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction } from "express";
 import { getTradingInfo } from "./services/TradingInfo";
 import cors from "cors";
 import { mockApiCall } from "./utils/mocks";
@@ -22,13 +22,18 @@ app.get("/", (req, res) => {
 
 const cachedGetTradingInfo = cacheRequest(5000, () => {
   console.log("I actually called");
+  // return getTradingInfo();
   return mockApiCall();
 });
 
-app.get("/tradingInfo", async (req, res) => {
-  // const result = await getTradingInfo();
-  const result = await cachedGetTradingInfo();
-  res.send({ data: result });
+app.get("/tradingInfo", async (req, res, next) => {
+  const result = await cachedGetTradingInfo().catch(next);
+  res.send(result);
+});
+
+app.use((err: Error, req: any, res: any, next: NextFunction) => {
+  console.error(err.stack);
+  res.status(500).send("error");
 });
 
 app.listen(port, () => {
